@@ -1,10 +1,10 @@
-package com.example.roomreservationapp;
+package com.example.reciclo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RoomreservationappApplicationTests {
+class RecicloApplicationTests {
 
 	@Test
 	void contextLoads() {

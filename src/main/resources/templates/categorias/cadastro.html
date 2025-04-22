@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: topo"></div>
+
+<h1>Cadastro</h1>
+
+<form action="/salvar" method="post">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
+
+    <label for="tipoPerfil">Tipo de Perfil:</label>
+    <select id="tipoPerfil" name="tipoPerfil" required>
+        <option value="">-- Selecione --</option>
+        <option value="DOADOR">Doador</option>
+        <option value="COLETOR">Coletor</option>
+    </select>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+</body>
+
+</html>
+

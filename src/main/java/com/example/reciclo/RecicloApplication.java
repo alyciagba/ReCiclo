@@ -1,13 +1,13 @@
-package com.example.roomreservationapp;
+package com.example.reciclo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RoomreservationappApplication {
+public class RecicloApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RoomreservationappApplication.class, args);
+		SpringApplication.run(RecicloApplication.class, args);
 	}
 
 }

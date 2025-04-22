@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - ReCiclo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+
+<h1>Cadastro realizado com sucesso!</h1>
+
+<div class="sucesso-cadastro-container">
+    <div class="sucesso-cadastro">
+        <h2>Você foi cadastrado.</h2>
+        <p>Bem-vindo, <span th:text="${usuario.name}"></span>!</p>
+        <a href="/home" class="btn">Ir para a página inicial</a>
+    </div>
+</div>
+</body>
+</html>

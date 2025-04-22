@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header th:fragment="topo">
+    <h1>ReCiclo</h1>
+    <nav>
+        <a th:href="@{/home}">Início</a>
+        <a th:href="@{/cadastro}">Cadastro</a>
+        <a th:href="@{/mapa}">Mapa</a>
+        <a th:href="@{/contato}">Contato</a>
+    </nav>
+</header>
+</body>
+</html>
