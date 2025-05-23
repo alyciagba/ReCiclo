@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+
+<div th:replace="fragments/header :: topo"></div>
+
+<div class="container">
+    <h2>Área do Coletor</h2>
+
+    <div class="user-card">
+        <div class="card-header">
+            <h3>Itens Disponíveis para Coleta</h3>
+        </div>
+        <div class="card-body">
+            <div class="empty-state" th:if="${#lists.isEmpty(itens)}">
+                <p>Não há itens disponíveis para coleta no momento.</p>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(itens)}">
+                <div class="filter-container">
+                    <input type="text" id="filtroItem" class="filter-input" placeholder="Buscar itens por nome, tipo, estado...">
+                </div>
+
+                <div class="table-container">
+                    <table class="table" id="tabelaItens">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Local de Retirada</th>
+                                <th>Doador</th>
+                                <th>Contato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item : ${itens}">
+                                <td th:text="${item.nomeItem}"></td>
+                                <td th:text="${item.tipoItem}"></td>
+                                <td th:text="${item.estadoItem}"></td>
+                                <td th:text="${item.localRetirada}"></td>
+                                <td th:text="${item.doador.name}"></td>
+                                <td th:text="${item.doador.email}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-card mt-4">
+        <div class="card-header">
+            <h3>Dicas para Coleta</h3>
+        </div>
+        <div class="card-body">
+            <ul class="tips-list">
+                <li>Entre em contato com o doador antes de ir buscar o item</li>
+                <li>Verifique se o item ainda está disponível</li>
+                <li>Combine um horário adequado para ambos</li>
+                <li>Leve equipamentos adequados para o transporte seguro</li>
+                <li>Confirme o recebimento do item</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 ReCiclo. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('filtroItem');
+    const tabela = document.getElementById('tabelaItens');
+    const linhas = tabela.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    input.addEventListener('keyup', function() {
+        const termo = input.value.toLowerCase();
+
+        for (let i = 0; i < linhas.length; i++) {
+            const linha = linhas[i];
+            const texto = linha.textContent.toLowerCase();
+
+            if (texto.indexOf(termo) > -1) {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+        }
+    });
+
+    // Add click functionality to rows for better user experience
+    for (let i = 0; i < linhas.length; i++) {
+        linhas[i].addEventListener('click', function() {
+            // Toggle a selected class on the row
+            this.classList.toggle('selected-row');
+        });
+    }
+});
+</script>
+
+</body>
+</html>

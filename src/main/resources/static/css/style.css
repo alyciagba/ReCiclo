@@ -437,6 +437,188 @@ nav a:hover {
     color: white;
 }
 
+/* Donor and Collector Pages Styles */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.container h2 {
+    color: #388e3c;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 2px solid #c8e6c9;
+    padding-bottom: 10px;
+}
+
+/* Card styles for donor and collector pages */
+.user-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #388e3c;
+    color: white;
+    padding: 15px 20px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Form styles for donor page */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #388e3c;
+    box-shadow: 0 0 5px rgba(56, 142, 60, 0.3);
+    outline: none;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2e7031;
+}
+
+/* Table styles */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table th {
+    background-color: #f1f8e9;
+    color: #388e3c;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+.table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr.selected-row {
+    background-color: #e8f5e9;
+    font-weight: 500;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Filter input styles */
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.filter-input:focus {
+    border-color: #388e3c;
+    box-shadow: 0 0 8px rgba(56, 142, 60, 0.2);
+    outline: none;
+    background-color: white;
+}
+
+/* Tips section styles */
+.tips-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tips-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    padding-left: 30px;
+}
+
+.tips-list li:last-child {
+    border-bottom: none;
+}
+
+.tips-list li:before {
+    content: "✓";
+    color: #388e3c;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Spacing utility */
+.mt-4 {
+    margin-top: 30px;
+}
+
+/* Empty state message */
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #757575;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .team-member {
         flex-direction: column;
@@ -446,5 +628,18 @@ nav a:hover {
         height: 200px;
         border-right: none;
         border-bottom: 1px solid #ddd;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .table th, 
+    .table td {
+        padding: 10px;
     }
 }

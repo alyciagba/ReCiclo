@@ -23,18 +23,22 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, 
                                        Authentication authentication) throws IOException, ServletException {
-        
+
         String tipoPerfil = request.getParameter("tipoPerfil");
         String email = authentication.getName();
-        
-        if (tipoPerfil != null && !tipoPerfil.isEmpty()) {
-            Usuario usuario = usuarioRepository.findByEmail(email);
-            if (usuario != null) {
+
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario != null) {
+            if (tipoPerfil != null && !tipoPerfil.isEmpty()) {
                 usuario.setTipoPerfil(tipoPerfil);
                 usuarioRepository.save(usuario);
             }
+
+            // Store user information in session
+            request.getSession().setAttribute("usuarioLogado", email);
+            request.getSession().setAttribute("tipoPerfil", usuario.getTipoPerfil());
         }
-        
+
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
