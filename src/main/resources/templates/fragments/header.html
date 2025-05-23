@@ -11,6 +11,8 @@
         <a th:href="@{/cadastro}">Cadastro</a>
         <a th:href="@{/mapa}">Mapa</a>
         <a th:href="@{/contato}">Contato</a>
+        <a th:if="${session.usuarioLogado == null}" th:href="@{/entrar}">Login</a>
+        <a th:if="${session.usuarioLogado != null}" th:href="@{/logout}">Logout</a>
     </nav>
 </header>
 </body>
