@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"><title></title></head>
+
+<body>
+<div th:replace="fragments/header :: topo"></div>
+
+<div class="cadastro-conteiner">
+    <h1>Login</h1>
+
+    <div th:if="${erro}" class="alert alert-danger" role="alert" th:text="${erro}"></div>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert" th:text="${mensagem}"></div>
+    <div th:if="${loginRequired}" class="alert alert-warning" role="alert" th:text="${loginRequired}"></div>
+
+    <form action="/login" method="post">
+        <label for="username">E-mail:</label>
+        <input type="email" id="username" name="username" maxlength="200" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="tipoPerfil">Tipo de Perfil:</label>
+        <select id="tipoPerfil" name="tipoPerfil" required>
+            <option value="">-- Selecione --</option>
+            <option value="doador">Doador</option>
+            <option value="coletor">Coletor</option>
+        </select>
+
+        <button type="submit" class="btn">Entrar</button>
+    </form>
+
+    <div class="cadastro-link">
+        <p>Não tem uma conta? <a th:href="@{/cadastro}">Cadastre-se</a></p>
+    </div>
+
+</div>
+
+</body>
+
+</html>
