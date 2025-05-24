@@ -34,7 +34,6 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
                 usuarioRepository.save(usuario);
             }
 
-            // Store user information in session
             request.getSession().setAttribute("usuarioLogado", email);
             request.getSession().setAttribute("tipoPerfil", usuario.getTipoPerfil());
         }

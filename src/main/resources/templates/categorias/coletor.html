@@ -92,10 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add click functionality to rows for better user experience
     for (let i = 0; i < linhas.length; i++) {
         linhas[i].addEventListener('click', function() {
-            // Toggle a selected class on the row
             this.classList.toggle('selected-row');
         });
     }

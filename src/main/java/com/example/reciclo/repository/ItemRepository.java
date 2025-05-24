@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByDoador(Usuario doador);
-    List<Item> findAll();
 }
