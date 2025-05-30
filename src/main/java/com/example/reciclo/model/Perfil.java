@@ -15,33 +15,29 @@ public class Perfil {
     private Usuario usuario;
 
     @Column(nullable = false)
-    private String tipoPerfil; // "DOADOR" ou "COLETOR"
-
-    // Campos específicos para DOADOR
-    @Column
-    private String preferenciasMateriais; // ex: "plástico, papel, vidro"
+    private String tipoPerfil;
 
     @Column
-    private String frequenciaDoacao; // ex: "semanal", "mensal"
-
-    // Campos específicos para COLETOR
-    @Column
-    private String tiposMaterialColetado; // ex: "plástico, papel, vidro"
+    private String preferenciasMateriais;
 
     @Column
-    private String raioAtuacao; // em km
+    private String frequenciaDoacao;
 
     @Column
-    private String disponibilidade; // ex: "seg-sex, 9h-18h"
+    private String tiposMaterialColetado;
 
     @Column
-    private String capacidadeColeta; // quantidade/volume que pode coletar
+    private String raioAtuacao;
 
-    // Construtor vazio necessário para JPA
+    @Column
+    private String disponibilidade;
+
+    @Column
+    private String capacidadeColeta;
+
     public Perfil() {
     }
 
-    // Construtor para perfil DOADOR
     public Perfil(Usuario usuario, String preferenciasMateriais, String frequenciaDoacao) {
         this.usuario = usuario;
         this.tipoPerfil = "DOADOR";
@@ -49,7 +45,6 @@ public class Perfil {
         this.frequenciaDoacao = frequenciaDoacao;
     }
 
-    // Construtor para perfil COLETOR
     public Perfil(Usuario usuario, String tiposMaterialColetado, String raioAtuacao,
                  String disponibilidade, String capacidadeColeta) {
         this.usuario = usuario;
@@ -60,7 +55,6 @@ public class Perfil {
         this.capacidadeColeta = capacidadeColeta;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
