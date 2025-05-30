@@ -68,6 +68,9 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "doador", cascade = CascadeType.ALL)
     private List<Item> itens;
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Perfil perfil;
+
     public Usuario() {}
 
     public Usuario(String name, String email, String senha, String tipoPerfil) {
@@ -231,6 +234,14 @@ public class Usuario implements UserDetails {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     @Override
