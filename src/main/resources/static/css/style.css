@@ -260,6 +260,55 @@ nav a:hover {
     background-color: #2e7031;
 }
 
+/* Secondary button */
+.btn-secondary {
+    background-color: #757575;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
+}
+
+/* Icon buttons for actions */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+}
+
+.btn-edit:hover {
+    background-color: #e3f2fd;
+}
+
+.btn-delete:hover {
+    background-color: #ffebee;
+}
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -518,6 +567,55 @@ nav a:hover {
 
 .btn-primary:hover {
     background-color: #2e7031;
+}
+
+/* Secondary button */
+.btn-secondary {
+    background-color: #757575;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
+}
+
+/* Icon buttons for actions */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+}
+
+.btn-edit:hover {
+    background-color: #e3f2fd;
+}
+
+.btn-delete:hover {
+    background-color: #ffebee;
 }
 
 /* Table styles */

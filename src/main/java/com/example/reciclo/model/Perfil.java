@@ -17,42 +17,17 @@ public class Perfil {
     @Column(nullable = false)
     private String tipoPerfil;
 
-    @Column
-    private String preferenciasMateriais;
-
-    @Column
-    private String frequenciaDoacao;
-
-    @Column
-    private String tiposMaterialColetado;
-
-    @Column
-    private String raioAtuacao;
-
-    @Column
-    private String disponibilidade;
-
-    @Column
-    private String capacidadeColeta;
-
     public Perfil() {
     }
 
-    public Perfil(Usuario usuario, String preferenciasMateriais, String frequenciaDoacao) {
+    public Perfil(Usuario usuario) {
         this.usuario = usuario;
         this.tipoPerfil = "DOADOR";
-        this.preferenciasMateriais = preferenciasMateriais;
-        this.frequenciaDoacao = frequenciaDoacao;
     }
 
-    public Perfil(Usuario usuario, String tiposMaterialColetado, String raioAtuacao,
-                 String disponibilidade, String capacidadeColeta) {
+    public Perfil(Usuario usuario, String tipoPerfil) {
         this.usuario = usuario;
-        this.tipoPerfil = "COLETOR";
-        this.tiposMaterialColetado = tiposMaterialColetado;
-        this.raioAtuacao = raioAtuacao;
-        this.disponibilidade = disponibilidade;
-        this.capacidadeColeta = capacidadeColeta;
+        this.tipoPerfil = tipoPerfil;
     }
 
     public Long getId() {
@@ -77,53 +52,5 @@ public class Perfil {
 
     public void setTipoPerfil(String tipoPerfil) {
         this.tipoPerfil = tipoPerfil;
-    }
-
-    public String getPreferenciasMateriais() {
-        return preferenciasMateriais;
-    }
-
-    public void setPreferenciasMateriais(String preferenciasMateriais) {
-        this.preferenciasMateriais = preferenciasMateriais;
-    }
-
-    public String getFrequenciaDoacao() {
-        return frequenciaDoacao;
-    }
-
-    public void setFrequenciaDoacao(String frequenciaDoacao) {
-        this.frequenciaDoacao = frequenciaDoacao;
-    }
-
-    public String getTiposMaterialColetado() {
-        return tiposMaterialColetado;
-    }
-
-    public void setTiposMaterialColetado(String tiposMaterialColetado) {
-        this.tiposMaterialColetado = tiposMaterialColetado;
-    }
-
-    public String getRaioAtuacao() {
-        return raioAtuacao;
-    }
-
-    public void setRaioAtuacao(String raioAtuacao) {
-        this.raioAtuacao = raioAtuacao;
-    }
-
-    public String getDisponibilidade() {
-        return disponibilidade;
-    }
-
-    public void setDisponibilidade(String disponibilidade) {
-        this.disponibilidade = disponibilidade;
-    }
-
-    public String getCapacidadeColeta() {
-        return capacidadeColeta;
-    }
-
-    public void setCapacidadeColeta(String capacidadeColeta) {
-        this.capacidadeColeta = capacidadeColeta;
     }
 }

@@ -3,7 +3,9 @@ package com.example.reciclo.service;
 import com.example.reciclo.model.Item;
 import com.example.reciclo.model.Usuario;
 import com.example.reciclo.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,7 +34,27 @@ public class ItemService {
         return itemRepository.findById(id).orElse(null);
     }
 
-    public void excluirItem(Long id) {
-        itemRepository.deleteById(id);
+    @Transactional
+    public boolean deletarItem(Long itemId, Usuario doador) {
+        Item item = itemRepository.findById(itemId).orElse(null);
+        if (item != null && item.getDoador().getId().equals(doador.getId())) {
+            itemRepository.deleteById(itemId);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean atualizarItem(Long itemId, Item itemAtualizado, Usuario doador) {
+        Item item = itemRepository.findById(itemId).orElse(null);
+        if (item != null && item.getDoador().getId().equals(doador.getId())) {
+            item.setNomeItem(itemAtualizado.getNomeItem());
+            item.setTipoItem(itemAtualizado.getTipoItem());
+            item.setEstadoItem(itemAtualizado.getEstadoItem());
+            item.setLocalRetirada(itemAtualizado.getLocalRetirada());
+            itemRepository.save(item);
+            return true;
+        }
+        return false;
     }
 }

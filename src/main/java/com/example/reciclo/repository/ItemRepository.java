@@ -7,7 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+
+
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByDoador(Usuario doador);
+    void deleteByIdAndDoadorId(Long itemId, Long doadorId);
 }

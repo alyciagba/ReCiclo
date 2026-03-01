@@ -41,28 +41,28 @@ public class Usuario implements UserDetails {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @Column
+    @Column (nullable = false)
     private String cep;
 
-    @Column
+    @Column (nullable = false)
     private String logradouro;
 
-    @Column
+    @Column (nullable = false)
     private String numero;
 
-    @Column
+    @Column (nullable = false)
     private String bairro;
 
-    @Column
+    @Column (nullable = false)
     private String municipio;
 
-    @Column
+    @Column (nullable = false)
     private String estado;
 
     @Column
     private String complemento;
 
-    @Column
+    @Column (nullable = false)
     private String tipoPerfil;
 
     @OneToMany(mappedBy = "doador", cascade = CascadeType.ALL)

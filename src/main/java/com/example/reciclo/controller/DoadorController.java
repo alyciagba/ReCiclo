@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -61,6 +62,73 @@ public class DoadorController {
         itemService.salvarItem(item);
         
         redirectAttributes.addFlashAttribute("mensagem", "Item cadastrado com sucesso!");
+        return "redirect:/doador";
+    }
+
+    @PostMapping("/deletar-item")
+    public String deletarItem(@RequestParam Long itemId, HttpSession session, RedirectAttributes redirectAttributes) {
+        String email = (String) session.getAttribute("usuarioLogado");
+        if (email == null) {
+            return "redirect:/entrar";
+        }
+
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            return "redirect:/home";
+        }
+
+        boolean deletado = itemService.deletarItem(itemId, usuario);
+
+        if (deletado) {
+            redirectAttributes.addFlashAttribute("mensagem", "Item deletado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("erro", "Não foi possível deletar o item.");
+        }
+
+        return "redirect:/doador";
+    }
+
+    @GetMapping("/editar-item")
+    public String editarItemForm(@RequestParam Long itemId, Model model, HttpSession session) {
+        String email = (String) session.getAttribute("usuarioLogado");
+        if (email == null) {
+            return "redirect:/entrar";
+        }
+
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            return "redirect:/home";
+        }
+
+        Item item = itemService.buscarItemPorId(itemId);
+        if (item == null || !item.getDoador().getId().equals(usuario.getId())) {
+            return "redirect:/doador";
+        }
+
+        model.addAttribute("item", item);
+        return "categorias/editar-item";
+    }
+
+    @PostMapping("/editar-item")
+    public String editarItem(@RequestParam Long itemId, Item itemAtualizado, HttpSession session, RedirectAttributes redirectAttributes) {
+        String email = (String) session.getAttribute("usuarioLogado");
+        if (email == null) {
+            return "redirect:/entrar";
+        }
+
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            return "redirect:/home";
+        }
+
+        boolean atualizado = itemService.atualizarItem(itemId, itemAtualizado, usuario);
+
+        if (atualizado) {
+            redirectAttributes.addFlashAttribute("mensagem", "Item atualizado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("erro", "Não foi possível atualizar o item.");
+        }
+
         return "redirect:/doador";
     }
 }
