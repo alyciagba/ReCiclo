@@ -54,6 +54,10 @@ public class SecurityConfig {
                         .requestMatchers("/entrar", "/entrar/**", "/registrar", "/registrar/**", 
                                         "/css/**", "/js/**", "/images/**", "/", "/home",
                                         "/cadastro", "/salvar", "/contato", "/mapa").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/usuarios", "/api/v1/usuarios/email/**").permitAll()
+                        .requestMatchers("/api/v1/pontos-coleta/**").permitAll()
+                        .requestMatchers("/api/v1/items").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

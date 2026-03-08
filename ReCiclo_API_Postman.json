@@ -1,0 +1,334 @@
+{
+  "info": {
+    "name": "ReCiclo API REST",
+    "description": "Coleção de testes para API REST ReCiclo",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Autenticação",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Obter por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Obter por Email",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios/email/joao@example.com",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios", "email", "joao@example.com"]
+            }
+          }
+        },
+        {
+          "name": "Registrar novo usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\",\n  \"confirmarSenha\": \"senha123\",\n  \"cpf\": \"123.456.789-00\",\n  \"celular\": \"(11) 98765-4321\",\n  \"genero\": \"M\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"cep\": \"12345-678\",\n  \"logradouro\": \"Rua A\",\n  \"numero\": \"123\",\n  \"bairro\": \"Centro\",\n  \"municipio\": \"São Paulo\",\n  \"estado\": \"SP\",\n  \"complemento\": \"Apto 101\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva Santos\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\",\n  \"confirmarSenha\": \"senha123\",\n  \"celular\": \"(11) 99999-8888\",\n  \"genero\": \"M\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"cep\": \"54321-876\",\n  \"logradouro\": \"Rua B\",\n  \"numero\": \"456\",\n  \"bairro\": \"Vila Nova\",\n  \"municipio\": \"Rio de Janeiro\",\n  \"estado\": \"RJ\",\n  \"complemento\": \"Apto 202\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar usuário",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "usuarios", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Itens",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/items",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items"]
+            }
+          }
+        },
+        {
+          "name": "Obter por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/items/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items", "1"]
+            }
+          }
+        },
+        {
+          "name": "Listar por doador",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/items/doador/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items", "doador", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar novo item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeItem\": \"Garrafa de Vidro\",\n  \"estadoItem\": \"Novo\",\n  \"tipoItem\": \"Vidro\",\n  \"localRetirada\": \"Rua A, 123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/items?doadorId=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items"],
+              "query": [
+                {
+                  "key": "doadorId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeItem\": \"Garrafa de Vidro Verde\",\n  \"estadoItem\": \"Usado\",\n  \"tipoItem\": \"Vidro\",\n  \"localRetirada\": \"Rua A, 123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/items/1?doadorId=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items", "1"],
+              "query": [
+                {
+                  "key": "doadorId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deletar item",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/items/1?doadorId=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "items", "1"],
+              "query": [
+                {
+                  "key": "doadorId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pontos de Coleta",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta"]
+            }
+          }
+        },
+        {
+          "name": "Obter por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta", "1"]
+            }
+          }
+        },
+        {
+          "name": "Listar por tipo",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta/tipo/Vidro",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta", "tipo", "Vidro"]
+            }
+          }
+        },
+        {
+          "name": "Criar novo ponto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomePonto\": \"Ponto Centro\",\n  \"endereco\": \"Rua Principal, 100\",\n  \"tipoPonto\": \"Vidro\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar ponto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomePonto\": \"Ponto Centro Atualizado\",\n  \"endereco\": \"Rua Principal, 150\",\n  \"tipoPonto\": \"Vidro e Plástico\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar ponto",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/pontos-coleta/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "pontos-coleta", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
+
