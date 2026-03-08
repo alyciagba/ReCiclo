@@ -11,7 +11,6 @@ public class LoginController {
     @GetMapping("/entrar")
     public String mostrarFormularioLogin(
             @RequestParam(required = false) String error,
-            @RequestParam(required = false) String logout,
             @RequestParam(required = false) String loginRequired,
             @RequestParam(required = false) String logoutSuccess,
             Model model) {

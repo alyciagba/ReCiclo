@@ -41,25 +41,4 @@ public class ItemMapper {
 
         return dto;
     }
-
-    public ItemDTO toDTO(Item item) {
-        if (item == null) return null;
-
-        ItemDTO dto = new ItemDTO();
-        dto.setNomeItem(item.getNomeItem());
-        dto.setEstadoItem(item.getEstadoItem());
-        dto.setTipoItem(item.getTipoItem());
-        dto.setLocalRetirada(item.getLocalRetirada());
-
-        if (item.getDoador() != null) {
-            dto.setDoadorId(item.getDoador().getId());
-        }
-
-        if (item.getPontoDeColeta() != null) {
-            dto.setPontoDeColetaId(item.getPontoDeColeta().getId());
-        }
-
-        return dto;
-    }
 }
-

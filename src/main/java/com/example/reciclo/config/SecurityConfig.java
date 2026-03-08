@@ -51,7 +51,15 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/entrar", "/entrar/**", "/registrar", "/registrar/**", 
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
+                        .requestMatchers("/entrar", "/entrar/**", "/registrar", "/registrar/**",
                                         "/css/**", "/js/**", "/images/**", "/", "/home",
                                         "/cadastro", "/salvar", "/contato", "/mapa").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()

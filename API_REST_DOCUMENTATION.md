@@ -1,18 +1,31 @@
-# 📚 Documentação da API REST - ReCiclo
+# API REST - ReCiclo
+
+Documentacao de uso da API REST do ReCiclo.
+O objetivo deste arquivo e servir como referencia rapida para desenvolvimento e avaliacao academica.
 
 ## Base URL
-```
+
+```text
 http://localhost:8080/api/v1
 ```
 
+## Regras gerais
+
+- Formato de request/response: `application/json`
+- IDs: `Long`
+- Datas: `yyyy-MM-dd`
+- Os exemplos abaixo usam valores ficticios
+- Quando a API retorna erro simples, o corpo pode vir como string
+
 ---
 
-## 🔐 Autenticação
+## Autenticacao
 
-### POST /auth/login
-Autenticar usuário e obter informações de sessão.
+### `POST /auth/login`
+Realiza login com email e senha.
 
-**Request Body:**
+**Request body**
+
 ```json
 {
   "email": "usuario@example.com",
@@ -20,54 +33,66 @@ Autenticar usuário e obter informações de sessão.
 }
 ```
 
-**Response (200 OK):**
+**200 OK**
+
 ```json
 {
   "id": 1,
-  "name": "João Silva",
+  "name": "Joao Silva",
   "email": "usuario@example.com",
   "tipoPerfil": "USUARIO"
 }
 ```
 
-**Respostas de Erro:**
-- `401 Unauthorized`: Usuário ou senha inválidos
+**401 Unauthorized**
 
----
-
-## 👥 Usuários
-
-### GET /usuarios
-Listar todos os usuários (dados públicos).
-
-**Response (200 OK):**
 ```json
-[
-  {
-    "id": 1,
-    "name": "João Silva",
-    "email": "joao@example.com",
-    "tipoPerfil": "USUARIO",
-    "cep": "12345-678",
-    "municipio": "São Paulo",
-    "estado": "SP"
-  }
-]
+"Usuario ou senha invalidos"
 ```
 
 ---
 
-### GET /usuarios/{id}
-Obter dados de um usuário específico.
+## Usuarios
 
-**Path Parameters:**
-- `id` (Long): ID do usuário
+### `GET /usuarios`
+Retorna a lista completa de usuarios.
 
-**Response (200 OK):**
+**200 OK**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Joao Silva",
+    "email": "joao@example.com",
+    "cpf": "123.456.789-00",
+    "celular": "(11) 98765-4321",
+    "genero": "M",
+    "dataNascimento": "1990-05-15",
+    "cep": "12345-678",
+    "logradouro": "Rua A",
+    "numero": "123",
+    "bairro": "Centro",
+    "municipio": "Sao Paulo",
+    "estado": "SP",
+    "complemento": "Apto 101",
+    "tipoPerfil": "USUARIO"
+  }
+]
+```
+
+### `GET /usuarios/{id}`
+Retorna um usuario pelo ID.
+
+**Path params**
+- `id`: ID do usuario
+
+**200 OK**
+
 ```json
 {
   "id": 1,
-  "name": "João Silva",
+  "name": "Joao Silva",
   "email": "joao@example.com",
   "cpf": "123.456.789-00",
   "celular": "(11) 98765-4321",
@@ -77,40 +102,58 @@ Obter dados de um usuário específico.
   "logradouro": "Rua A",
   "numero": "123",
   "bairro": "Centro",
-  "municipio": "São Paulo",
+  "municipio": "Sao Paulo",
   "estado": "SP",
   "complemento": "Apto 101",
   "tipoPerfil": "USUARIO"
 }
 ```
 
-**Respostas de Erro:**
-- `404 Not Found`: Usuário não encontrado
+**404 Not Found**
 
----
+```json
+{}
+```
 
-### GET /usuarios/email/{email}
-Obter usuário pelo email.
+### `GET /usuarios/email/{email}`
+Busca usuario por email.
 
-**Path Parameters:**
-- `email` (String): Email do usuário
+**Path params**
+- `email`: email do usuario
 
-**Response (200 OK):**
+**200 OK**
+
 ```json
 {
   "id": 1,
-  "name": "João Silva",
+  "name": "Joao Silva",
   "email": "joao@example.com",
+  "cpf": "123.456.789-00",
+  "celular": "(11) 98765-4321",
+  "genero": "M",
+  "dataNascimento": "1990-05-15",
+  "cep": "12345-678",
+  "logradouro": "Rua A",
+  "numero": "123",
+  "bairro": "Centro",
+  "municipio": "Sao Paulo",
+  "estado": "SP",
+  "complemento": "Apto 101",
   "tipoPerfil": "USUARIO"
 }
 ```
 
----
+**404 Not Found**
 
-### POST /usuarios
-Registrar novo usuário.
+```json
+{}
+```
 
-**Request Body:**
+### `POST /usuarios`
+Cria um novo usuario.
+
+**Request body**
+
 ```json
 {
   "name": "Maria Santos",
@@ -131,35 +174,55 @@ Registrar novo usuário.
 }
 ```
 
-**Response (201 Created):**
+**201 Created**
+
 ```json
 {
   "id": 2,
   "name": "Maria Santos",
   "email": "maria@example.com",
-  "tipoPerfil": "USUARIO",
+  "cpf": "123.456.789-00",
+  "celular": "(11) 98765-4321",
+  "genero": "F",
+  "dataNascimento": "1995-03-20",
   "cep": "12345-678",
+  "logradouro": "Rua B",
+  "numero": "456",
+  "bairro": "Vila Nova",
   "municipio": "Rio de Janeiro",
-  "estado": "RJ"
+  "estado": "RJ",
+  "complemento": "Apto 202",
+  "tipoPerfil": "USUARIO"
 }
 ```
 
-**Respostas de Erro:**
-- `400 Bad Request`: Senhas não coincidem ou validação falhou
-- `409 Conflict`: Email ou CPF já cadastrado
+**400 Bad Request**
 
----
+```json
+"As senhas nao coincidem"
+```
 
-### PUT /usuarios/{id}
-Atualizar dados do usuário (não atualiza email/CPF/senha).
+**409 Conflict**
 
-**Path Parameters:**
-- `id` (Long): ID do usuário
+```json
+"Ja existe um usuario com este e-mail ou CPF"
+```
 
-**Request Body:**
+### `PUT /usuarios/{id}`
+Atualiza dados cadastrais de um usuario existente.
+
+**Path params**
+- `id`: ID do usuario
+
+**Request body**
+
 ```json
 {
   "name": "Maria Santos Silva",
+  "email": "maria@example.com",
+  "senha": "senha123",
+  "confirmarSenha": "senha123",
+  "cpf": "123.456.789-00",
   "celular": "(11) 99999-8888",
   "genero": "F",
   "dataNascimento": "1995-03-20",
@@ -167,43 +230,57 @@ Atualizar dados do usuário (não atualiza email/CPF/senha).
   "logradouro": "Rua C",
   "numero": "789",
   "bairro": "Centro",
-  "municipio": "Brasília",
+  "municipio": "Brasilia",
   "estado": "DF",
   "complemento": "Apto 303"
 }
 ```
 
-**Response (200 OK):**
+**200 OK**
+
 ```json
 {
   "id": 2,
   "name": "Maria Santos Silva",
   "email": "maria@example.com",
+  "cpf": "123.456.789-00",
+  "celular": "(11) 99999-8888",
+  "genero": "F",
+  "dataNascimento": "1995-03-20",
+  "cep": "54321-876",
+  "logradouro": "Rua C",
+  "numero": "789",
+  "bairro": "Centro",
+  "municipio": "Brasilia",
+  "estado": "DF",
+  "complemento": "Apto 303",
   "tipoPerfil": "USUARIO"
 }
 ```
 
+**404 Not Found**
+
+```json
+{}
+```
+
+### `DELETE /usuarios/{id}`
+Remove um usuario pelo ID.
+
+**Path params**
+- `id`: ID do usuario
+
+**204 No Content**
+
 ---
 
-### DELETE /usuarios/{id}
-Deletar usuário (requer autenticação).
+## Itens
 
-**Path Parameters:**
-- `id` (Long): ID do usuário
+### `GET /items`
+Lista todos os itens cadastrados.
 
-**Response (204 No Content)**
+**200 OK**
 
----
-
-## 📦 Itens
-
-### GET /items
-Listar todos os itens.
-
-**Query Parameters:**
-- Nenhum
-
-**Response (200 OK):**
 ```json
 [
   {
@@ -213,22 +290,21 @@ Listar todos os itens.
     "tipoItem": "Vidro",
     "localRetirada": "Rua A, 123",
     "doadorId": 1,
-    "doadorNome": "João Silva",
+    "doadorNome": "Joao Silva",
     "pontoDeColetaId": null,
     "pontoDeColetaNome": null
   }
 ]
 ```
 
----
+### `GET /items/{id}`
+Retorna um item por ID.
 
-### GET /items/{id}
-Obter item específico.
+**Path params**
+- `id`: ID do item
 
-**Path Parameters:**
-- `id` (Long): ID do item
+**200 OK**
 
-**Response (200 OK):**
 ```json
 {
   "id": 1,
@@ -237,21 +313,26 @@ Obter item específico.
   "tipoItem": "Vidro",
   "localRetirada": "Rua A, 123",
   "doadorId": 1,
-  "doadorNome": "João Silva",
+  "doadorNome": "Joao Silva",
   "pontoDeColetaId": 1,
   "pontoDeColetaNome": "Ponto Centro"
 }
 ```
 
----
+**404 Not Found**
 
-### GET /items/doador/{doadorId}
-Listar todos os itens de um doador.
+```json
+{}
+```
 
-**Path Parameters:**
-- `doadorId` (Long): ID do doador
+### `GET /items/doador/{doadorId}`
+Lista itens por doador.
 
-**Response (200 OK):**
+**Path params**
+- `doadorId`: ID do doador
+
+**200 OK**
+
 ```json
 [
   {
@@ -261,20 +342,21 @@ Listar todos os itens de um doador.
     "tipoItem": "Vidro",
     "localRetirada": "Rua A, 123",
     "doadorId": 1,
-    "doadorNome": "João Silva"
+    "doadorNome": "Joao Silva",
+    "pontoDeColetaId": null,
+    "pontoDeColetaNome": null
   }
 ]
 ```
 
----
+### `POST /items`
+Cria um item.
 
-### POST /items
-Criar novo item (requer autenticação).
+**Query params**
+- `doadorId`: ID do doador dono do item
 
-**Query Parameters:**
-- `doadorId` (Long): ID do doador/usuário logado
+**Request body**
 
-**Request Body:**
 ```json
 {
   "nomeItem": "Garrafa de Vidro",
@@ -284,7 +366,8 @@ Criar novo item (requer autenticação).
 }
 ```
 
-**Response (201 Created):**
+**201 Created**
+
 ```json
 {
   "id": 1,
@@ -293,22 +376,23 @@ Criar novo item (requer autenticação).
   "tipoItem": "Vidro",
   "localRetirada": "Rua A, 123",
   "doadorId": 1,
-  "doadorNome": "João Silva"
+  "doadorNome": "Joao Silva",
+  "pontoDeColetaId": null,
+  "pontoDeColetaNome": null
 }
 ```
 
----
+### `PUT /items/{id}`
+Atualiza os dados de um item.
 
-### PUT /items/{id}
-Atualizar item (requer ser o doador).
+**Path params**
+- `id`: ID do item
 
-**Path Parameters:**
-- `id` (Long): ID do item
+**Query params**
+- `doadorId`: ID do doador usado para validar permissao
 
-**Query Parameters:**
-- `doadorId` (Long): ID do doador/proprietário do item
+**Request body**
 
-**Request Body:**
 ```json
 {
   "nomeItem": "Garrafa de Vidro Verde",
@@ -318,7 +402,8 @@ Atualizar item (requer ser o doador).
 }
 ```
 
-**Response (200 OK):**
+**200 OK**
+
 ```json
 {
   "id": 1,
@@ -327,39 +412,56 @@ Atualizar item (requer ser o doador).
   "tipoItem": "Vidro",
   "localRetirada": "Rua A, 123",
   "doadorId": 1,
-  "doadorNome": "João Silva"
+  "doadorNome": "Joao Silva",
+  "pontoDeColetaId": null,
+  "pontoDeColetaNome": null
 }
 ```
 
-**Respostas de Erro:**
-- `403 Forbidden`: Você não tem permissão para editar este item
-- `404 Not Found`: Item não encontrado
+**403 Forbidden**
+
+```json
+{}
+```
+
+**404 Not Found**
+
+```json
+{}
+```
+
+### `DELETE /items/{id}`
+Exclui um item.
+
+**Path params**
+- `id`: ID do item
+
+**Query params**
+- `doadorId`: ID do doador usado para validar permissao
+
+**204 No Content**
+
+**403 Forbidden**
+
+```json
+{}
+```
+
+**404 Not Found**
+
+```json
+{}
+```
 
 ---
 
-### DELETE /items/{id}
-Deletar item (requer ser o doador).
+## Pontos de coleta
 
-**Path Parameters:**
-- `id` (Long): ID do item
+### `GET /pontos-coleta`
+Lista todos os pontos de coleta.
 
-**Query Parameters:**
-- `doadorId` (Long): ID do doador/proprietário do item
+**200 OK**
 
-**Response (204 No Content)**
-
-**Respostas de Erro:**
-- `403 Forbidden`: Você não tem permissão para deletar este item
-- `404 Not Found`: Item não encontrado
-
----
-
-## 🗺️ Pontos de Coleta
-
-### GET /pontos-coleta
-Listar todos os pontos de coleta.
-
-**Response (200 OK):**
 ```json
 [
   {
@@ -371,15 +473,14 @@ Listar todos os pontos de coleta.
 ]
 ```
 
----
+### `GET /pontos-coleta/{id}`
+Retorna um ponto de coleta por ID.
 
-### GET /pontos-coleta/{id}
-Obter ponto de coleta específico.
+**Path params**
+- `id`: ID do ponto de coleta
 
-**Path Parameters:**
-- `id` (Long): ID do ponto
+**200 OK**
 
-**Response (200 OK):**
 ```json
 {
   "id": 1,
@@ -389,15 +490,20 @@ Obter ponto de coleta específico.
 }
 ```
 
----
+**404 Not Found**
 
-### GET /pontos-coleta/tipo/{tipo}
-Listar pontos de coleta por tipo.
+```json
+{}
+```
 
-**Path Parameters:**
-- `tipo` (String): Tipo de ponto (ex: "Vidro", "Plástico", "Metal")
+### `GET /pontos-coleta/tipo/{tipo}`
+Filtra pontos de coleta por tipo.
 
-**Response (200 OK):**
+**Path params**
+- `tipo`: tipo do ponto (ex.: `Vidro`, `Plastico`, `Metal`)
+
+**200 OK**
+
 ```json
 [
   {
@@ -409,102 +515,118 @@ Listar pontos de coleta por tipo.
 ]
 ```
 
----
+### `POST /pontos-coleta`
+Cria um novo ponto de coleta.
 
-### POST /pontos-coleta
-Criar novo ponto de coleta (requer autenticação).
+**Request body**
 
-**Request Body:**
 ```json
 {
   "nomePonto": "Ponto Vilela",
-  "endereco": "Rua Secundária, 200",
-  "tipoPonto": "Plástico"
+  "endereco": "Rua Secundaria, 200",
+  "tipoPonto": "Plastico"
 }
 ```
 
-**Response (201 Created):**
+**201 Created**
+
 ```json
 {
   "id": 2,
   "nomePonto": "Ponto Vilela",
-  "endereco": "Rua Secundária, 200",
-  "tipoPonto": "Plástico"
+  "endereco": "Rua Secundaria, 200",
+  "tipoPonto": "Plastico"
 }
 ```
 
----
+### `PUT /pontos-coleta/{id}`
+Atualiza um ponto de coleta.
 
-### PUT /pontos-coleta/{id}
-Atualizar ponto de coleta (requer autenticação).
+**Path params**
+- `id`: ID do ponto de coleta
 
-**Path Parameters:**
-- `id` (Long): ID do ponto
+**Request body**
 
-**Request Body:**
 ```json
 {
   "nomePonto": "Ponto Vilela - Atualizado",
-  "endereco": "Rua Secundária, 250",
-  "tipoPonto": "Plástico"
+  "endereco": "Rua Secundaria, 250",
+  "tipoPonto": "Plastico"
 }
 ```
 
-**Response (200 OK):**
+**200 OK**
+
 ```json
 {
   "id": 2,
   "nomePonto": "Ponto Vilela - Atualizado",
-  "endereco": "Rua Secundária, 250",
-  "tipoPonto": "Plástico"
+  "endereco": "Rua Secundaria, 250",
+  "tipoPonto": "Plastico"
 }
+```
+
+**404 Not Found**
+
+```json
+{}
+```
+
+### `DELETE /pontos-coleta/{id}`
+Remove um ponto de coleta.
+
+**Path params**
+- `id`: ID do ponto de coleta
+
+**204 No Content**
+
+**404 Not Found**
+
+```json
+{}
 ```
 
 ---
 
-### DELETE /pontos-coleta/{id}
-Deletar ponto de coleta (requer autenticação).
+## Codigos HTTP usados na API
 
-**Path Parameters:**
-- `id` (Long): ID do ponto
-
-**Response (204 No Content)**
-
----
-
-## 📊 Status de Respostas Padrão
-
-| Código | Significado |
-|--------|------------|
-| `200` | OK - Requisição bem-sucedida |
-| `201` | Created - Recurso criado com sucesso |
-| `204` | No Content - Operação bem-sucedida, sem conteúdo |
-| `400` | Bad Request - Dados inválidos |
-| `401` | Unauthorized - Não autenticado |
-| `403` | Forbidden - Sem permissão |
-| `404` | Not Found - Recurso não encontrado |
-| `409` | Conflict - Conflito (ex: email duplicado) |
-| `500` | Internal Server Error - Erro do servidor |
+| Codigo | Significado no projeto |
+| --- | --- |
+| `200` | Consulta ou atualizacao executada com sucesso |
+| `201` | Registro criado |
+| `204` | Exclusao realizada sem corpo de resposta |
+| `400` | Dados invalidos ou regra de negocio nao atendida |
+| `401` | Credenciais invalidas |
+| `403` | Requisicao sem permissao para o recurso |
+| `404` | Recurso nao encontrado |
+| `409` | Conflito de unicidade (email/cpf) |
+| `500` | Erro interno nao tratado |
 
 ---
 
-## 🔒 Segurança
+## Seguranca (estado atual)
 
-- Endpoints sem autenticação explícita aceitam requisições sem token
-- Endpoints que requerem autenticação devem ser acessados com a sessão ativa
-- Operações de PUT/DELETE em itens verificam se o usuário é o proprietário
-- Senhas são criptografadas com BCrypt
+Com base no `SecurityConfig` atual:
+
+- `POST /auth/login`: publico
+- `GET /usuarios`, `POST /usuarios`, `GET /usuarios/email/{email}`: publicos
+- `GET/POST/PUT/DELETE /pontos-coleta/**`: publicos
+- `GET /items`: publico
+- Outras rotas podem exigir sessao autenticada
+
+> Importante: como a autorizacao depende de matchers do Spring Security, valide em ambiente de execucao os fluxos que exigem login.
 
 ---
 
-## 🧪 Exemplos de Uso com cURL
+## Teste rapido com curl
 
-### Registrar novo usuário
+### Criar usuario
+
 ```bash
-curl -X POST http://localhost:8080/api/v1/usuarios \
-  -H "Content-Type: application/json" \
+curl -X POST http://localhost:8080/api/v1/usuarios \\
+  -H "Content-Type: application/json" \\
   -d '{
-    "name": "João Silva",
+    "name": "Joao Silva",
     "email": "joao@example.com",
     "senha": "senha123",
     "confirmarSenha": "senha123",
@@ -512,30 +634,33 @@ curl -X POST http://localhost:8080/api/v1/usuarios \
     "logradouro": "Rua A",
     "numero": "123",
     "bairro": "Centro",
-    "municipio": "São Paulo",
+    "municipio": "Sao Paulo",
     "estado": "SP"
   }'
 ```
 
-### Fazer login
+### Login
+
 ```bash
-curl -X POST http://localhost:8080/api/v1/auth/login \
-  -H "Content-Type: application/json" \
+curl -X POST http://localhost:8080/api/v1/auth/login \\
+  -H "Content-Type: application/json" \\
   -d '{
     "email": "joao@example.com",
     "senha": "senha123"
   }'
 ```
 
-### Listar todos os itens
+### Listar itens
+
 ```bash
 curl http://localhost:8080/api/v1/items
 ```
 
-### Criar novo item
+### Criar item
+
 ```bash
-curl -X POST "http://localhost:8080/api/v1/items?doadorId=1" \
-  -H "Content-Type: application/json" \
+curl -X POST "http://localhost:8080/api/v1/items?doadorId=1" \\
+  -H "Content-Type: application/json" \\
   -d '{
     "nomeItem": "Garrafa de Vidro",
     "estadoItem": "Novo",
@@ -545,43 +670,7 @@ curl -X POST "http://localhost:8080/api/v1/items?doadorId=1" \
 ```
 
 ### Listar pontos de coleta
+
 ```bash
 curl http://localhost:8080/api/v1/pontos-coleta
 ```
-
----
-
-## ⚠️ Notas Importantes
-
-1. **CORS está habilitado** para todas as origens (`*`)
-2. **Validação de dados**: Todos os campos obrigatórios são validados
-3. **Formato de resposta**: Sempre JSON
-4. **Tratamento de erros**: Respostas de erro incluem mensagens descritivas
-5. **Permissões**: Itens só podem ser editados/deletados por seu proprietário
-
----
-
-## 📝 Endpoints Resumo
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| `POST` | `/auth/login` | Autenticar usuário |
-| `GET` | `/usuarios` | Listar usuários |
-| `GET` | `/usuarios/{id}` | Obter usuário |
-| `GET` | `/usuarios/email/{email}` | Obter usuário por email |
-| `POST` | `/usuarios` | Registrar usuário |
-| `PUT` | `/usuarios/{id}` | Atualizar usuário |
-| `DELETE` | `/usuarios/{id}` | Deletar usuário |
-| `GET` | `/items` | Listar itens |
-| `GET` | `/items/{id}` | Obter item |
-| `GET` | `/items/doador/{doadorId}` | Listar itens do doador |
-| `POST` | `/items` | Criar item |
-| `PUT` | `/items/{id}` | Atualizar item |
-| `DELETE` | `/items/{id}` | Deletar item |
-| `GET` | `/pontos-coleta` | Listar pontos |
-| `GET` | `/pontos-coleta/{id}` | Obter ponto |
-| `GET` | `/pontos-coleta/tipo/{tipo}` | Listar pontos por tipo |
-| `POST` | `/pontos-coleta` | Criar ponto |
-| `PUT` | `/pontos-coleta/{id}` | Atualizar ponto |
-| `DELETE` | `/pontos-coleta/{id}` | Deletar ponto |
-

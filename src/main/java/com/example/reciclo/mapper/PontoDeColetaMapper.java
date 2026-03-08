@@ -28,15 +28,4 @@ public class PontoDeColetaMapper {
                 ponto.getTipoPonto()
         );
     }
-
-    public PontoDeColetaDTO toDTO(PontoDeColeta ponto) {
-        if (ponto == null) return null;
-
-        return new PontoDeColetaDTO(
-                ponto.getNomePonto(),
-                ponto.getEndereco(),
-                ponto.getTipoPonto()
-        );
-    }
 }
-

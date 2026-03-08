@@ -3,7 +3,6 @@ package com.example.reciclo.service;
 import com.example.reciclo.model.Item;
 import com.example.reciclo.model.Usuario;
 import com.example.reciclo.repository.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

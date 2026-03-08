@@ -5,6 +5,9 @@ import com.example.reciclo.dto.PontoDeColetaResponseDTO;
 import com.example.reciclo.mapper.PontoDeColetaMapper;
 import com.example.reciclo.model.PontoDeColeta;
 import com.example.reciclo.repository.PontoDeColetaRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,6 +96,11 @@ public class PontoDeColetaRestController {
      * DELETE /api/v1/pontos-coleta/{id} - Deletar ponto de coleta
      */
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deletar ponto de coleta", description = "Remove um ponto de coleta da base de dados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Ponto de coleta deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Ponto de coleta não encontrado")
+    })
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         if (!pontoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -101,4 +109,3 @@ public class PontoDeColetaRestController {
         return ResponseEntity.noContent().build();
     }
 }
-
